@@ -3,6 +3,7 @@ import chess
 import random
 from evaluations.simpleScore import simpleScore
 from evaluations.material import materialEvaluation
+from evaluations.quiescenceSearch import quiescenceSearch
 
 def getChildren(board:chess.Board,maximizing_player,sortMoves:bool):
     children = []
@@ -15,8 +16,11 @@ def getChildren(board:chess.Board,maximizing_player,sortMoves:bool):
             score = 0
         children.append((child,move,score))
     return sorted(children,key=lambda x:x[2],reverse=maximizing_player)
+i = 0
 
-def minimax(board,depth,maximizing_player,alpha=-1000,beta=1000):
+def minimax(board,depth,maximizing_player,alpha=-1000,beta=1000,options={'quiescenceSearch':True}):
+    global i
+    i+=1
     if board.is_game_over():
         if board.is_stalemate():
             return 0, None
@@ -25,13 +29,17 @@ def minimax(board,depth,maximizing_player,alpha=-1000,beta=1000):
         else:
             return -100, None
     if depth == 0:
-        return materialEvaluation(board), None
-    moves = getChildren(board, maximizing_player, True)
+        if options['quiescenceSearch']:
+            return quiescenceSearch(board, maximizing_player, alpha, beta, options=options), None
+        else:
+            return materialEvaluation(board),None
+
+    moves = getChildren(board, not maximizing_player, True)
     if maximizing_player:
         maximum = -1000
         maximumMove = None
         for child,move,_ in moves:
-            evaluation,_ = minimax(child,depth-1,not maximizing_player,alpha,beta)
+            evaluation,_ = minimax(child,depth-1,not maximizing_player,alpha,beta,options)
             if evaluation>maximum:
                 maximum=evaluation
                 maximumMove = move

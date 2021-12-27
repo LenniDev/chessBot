@@ -1,7 +1,7 @@
 import chess
 from evaluations.material import materialCount
 
-def simpleScore(board,child,move,maximizing_player):
+def simpleScore(board,child,move,maximizing_player): # needs maxamizing player to be reversed because it passes one layer down
     if maximizing_player:
         color = chess.WHITE
     else:
