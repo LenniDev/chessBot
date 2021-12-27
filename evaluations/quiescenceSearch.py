@@ -1,6 +1,7 @@
 from evaluations.material import materialEvaluation,materialCount
 from evaluations.PieceSquareTables import tableEvaluation
 from evaluations.simpleScore import simpleScore
+from evaluations.positionalEvaluation import positionalEvaluation
 import chess
 
 def getChildren(board:chess.Board,maximizing_player): # needs maxamizing player to be reversed because it passes one layer down
@@ -21,7 +22,7 @@ def quiescenceSearch(board:chess.Board,maximizing_player, alpha, beta, options,e
     #     standPatValue = materialEvaluation(board) + tableEvaluation(board) / 20
     # else:
     #     standPatValue = evaluation
-    standPatValue = materialEvaluation(board) + tableEvaluation(board) / 20
+    standPatValue = positionalEvaluation(board) #materialEvaluation(board) + tableEvaluation(board) / 20
     if maximizing_player:
         if standPatValue >= beta:
             return beta
