@@ -6,7 +6,7 @@ import time
 board = chess.Board()
 def show():
     with open('gameState.svg', mode='w') as gameState:
-        gameState.write(chess.svg.board(board, size=650, lastmove=move, orientation=chess.BLACK))
+        gameState.write(chess.svg.board(board, size=600, lastmove=move, orientation=chess.BLACK))
         gameState.close()
 
 pgns = []
@@ -24,7 +24,6 @@ while True:
     board.push(move)
     print(move,whiteTime)
     pgn+=str(move) + ' '
-
     show()
     bot.i = 0
     t1 = time.time()

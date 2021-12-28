@@ -20,7 +20,7 @@ for i in range(10000):
         t2 = time.time()
         whiteTime += t2-t1
         board.push(move)
-        print(move,bot.i,w.i,k.i,whiteTime)
+        print(move,bot.i,w.i,whiteTime)
         pgn+=str(move) + ' '
 
         black+=1
@@ -30,6 +30,6 @@ for i in range(10000):
         t2 = time.time()
         blackTime += t2-t1
         board.push(move)
-        print(move, bot.i,w.i,k.i,blackTime)
+        print(move, bot.i,w.i,blackTime)
         pgn += str(move) + ' '
         print(pgn)
