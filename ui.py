@@ -2,6 +2,7 @@ import bot
 import chess
 import chess.svg
 import time
+from variation import VariationRoot
 
 board = chess.Board()
 def show():
@@ -16,16 +17,14 @@ whiteTime = 0
 blackTime = 0
 
 while True:
-    bot.i = 0
     t1 = time.time()
-    _,move=bot.minimax(board,2,True)
+    _,move=bot.minimax(board,4,True)
     t2 = time.time()
     whiteTime += t2-t1
     board.push(move)
     print(move,whiteTime)
     pgn+=str(move) + ' '
     show()
-    bot.i = 0
     t1 = time.time()
     print('your turn')
     while True:

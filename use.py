@@ -26,7 +26,7 @@ for i in range(10000):
         black+=1
         bot.i = 0
         t1 = time.time()
-        _, move = bot.minimax(board, 2, False)
+        _, move = bot.minimax(board, 3, False)
         t2 = time.time()
         blackTime += t2-t1
         board.push(move)
